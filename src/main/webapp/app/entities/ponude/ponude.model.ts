@@ -1,6 +1,5 @@
 import { IPostupci } from 'app/entities/postupci/postupci.model';
 import { IPonudjaci } from 'app/entities/ponudjaci/ponudjaci.model';
-import { ISpecifikacije } from 'app/entities/specifikacije/specifikacije.model';
 
 export interface IPonude {
   id?: number;
@@ -17,7 +16,6 @@ export interface IPonude {
   selected?: boolean | null;
   postupci?: IPostupci | null;
   ponudjaci?: IPonudjaci | null;
-  specifikacije?: ISpecifikacije | null;
 }
 
 export class Ponude implements IPonude {
@@ -35,8 +33,7 @@ export class Ponude implements IPonude {
     public sifraPonudjaca?: number,
     public selected?: boolean | null,
     public postupci?: IPostupci | null,
-    public ponudjaci?: IPonudjaci | null,
-    public specifikacije?: ISpecifikacije | null
+    public ponudjaci?: IPonudjaci | null
   ) {
     this.selected = this.selected ?? false;
   }

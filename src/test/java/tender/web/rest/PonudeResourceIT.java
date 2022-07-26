@@ -21,7 +21,6 @@ import tender.IntegrationTest;
 import tender.domain.Ponude;
 import tender.domain.Ponudjaci;
 import tender.domain.Postupci;
-import tender.domain.Specifikacije;
 import tender.repository.PonudeRepository;
 import tender.service.criteria.PonudeCriteria;
 
@@ -1461,32 +1460,6 @@ class PonudeResourceIT {
 
         // Get all the ponudeList where ponudjaci equals to (ponudjaciId + 1)
         defaultPonudeShouldNotBeFound("ponudjaciId.equals=" + (ponudjaciId + 1));
-    }
-
-    @Test
-    @Transactional
-    void getAllPonudesBySpecifikacijeIsEqualToSomething() throws Exception {
-        // Initialize the database
-        ponudeRepository.saveAndFlush(ponude);
-        Specifikacije specifikacije;
-        if (TestUtil.findAll(em, Specifikacije.class).isEmpty()) {
-            specifikacije = SpecifikacijeResourceIT.createEntity(em);
-            em.persist(specifikacije);
-            em.flush();
-        } else {
-            specifikacije = TestUtil.findAll(em, Specifikacije.class).get(0);
-        }
-        em.persist(specifikacije);
-        em.flush();
-        ponude.setSpecifikacije(specifikacije);
-        ponudeRepository.saveAndFlush(ponude);
-        Long specifikacijeId = specifikacije.getId();
-
-        // Get all the ponudeList where specifikacije equals to specifikacijeId
-        defaultPonudeShouldBeFound("specifikacijeId.equals=" + specifikacijeId);
-
-        // Get all the ponudeList where specifikacije equals to (specifikacijeId + 1)
-        defaultPonudeShouldNotBeFound("specifikacijeId.equals=" + (specifikacijeId + 1));
     }
 
     /**

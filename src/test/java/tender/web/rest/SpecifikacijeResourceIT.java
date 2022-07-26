@@ -18,7 +18,6 @@ import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.transaction.annotation.Transactional;
 import tender.IntegrationTest;
-import tender.domain.Ponude;
 import tender.domain.Specifikacije;
 import tender.repository.SpecifikacijeRepository;
 import tender.service.criteria.SpecifikacijeCriteria;
@@ -1192,32 +1191,6 @@ class SpecifikacijeResourceIT {
 
         // Get all the specifikacijeList where procijenjenaVrijednost is greater than SMALLER_PROCIJENJENA_VRIJEDNOST
         defaultSpecifikacijeShouldBeFound("procijenjenaVrijednost.greaterThan=" + SMALLER_PROCIJENJENA_VRIJEDNOST);
-    }
-
-    @Test
-    @Transactional
-    void getAllSpecifikacijesByPonudeIsEqualToSomething() throws Exception {
-        // Initialize the database
-        specifikacijeRepository.saveAndFlush(specifikacije);
-        Ponude ponude;
-        if (TestUtil.findAll(em, Ponude.class).isEmpty()) {
-            ponude = PonudeResourceIT.createEntity(em);
-            em.persist(ponude);
-            em.flush();
-        } else {
-            ponude = TestUtil.findAll(em, Ponude.class).get(0);
-        }
-        em.persist(ponude);
-        em.flush();
-        specifikacije.addPonude(ponude);
-        specifikacijeRepository.saveAndFlush(specifikacije);
-        Long ponudeId = ponude.getId();
-
-        // Get all the specifikacijeList where ponude equals to ponudeId
-        defaultSpecifikacijeShouldBeFound("ponudeId.equals=" + ponudeId);
-
-        // Get all the specifikacijeList where ponude equals to (ponudeId + 1)
-        defaultSpecifikacijeShouldNotBeFound("ponudeId.equals=" + (ponudeId + 1));
     }
 
     /**

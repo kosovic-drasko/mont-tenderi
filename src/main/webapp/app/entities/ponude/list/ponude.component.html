@@ -46,7 +46,6 @@
           <th scope="col"><span jhiTranslate="tenderApp.ponude.selected">Selected</span></th>
           <th scope="col"><span jhiTranslate="tenderApp.ponude.postupci">Postupci</span></th>
           <th scope="col"><span jhiTranslate="tenderApp.ponude.ponudjaci">Ponudjaci</span></th>
-          <th scope="col"><span jhiTranslate="tenderApp.ponude.specifikacije">Specifikacije</span></th>
           <th scope="col"></th>
         </tr>
       </thead>
@@ -74,11 +73,6 @@
           <td>
             <div *ngIf="ponude.ponudjaci">
               <a [routerLink]="['/ponudjaci', ponude.ponudjaci?.id, 'view']">{{ ponude.ponudjaci?.id }}</a>
-            </div>
-          </td>
-          <td>
-            <div *ngIf="ponude.specifikacije">
-              <a [routerLink]="['/specifikacije', ponude.specifikacije?.id, 'view']">{{ ponude.specifikacije?.id }}</a>
             </div>
           </td>
           <td class="text-end">

@@ -48,8 +48,6 @@ public class SpecifikacijeCriteria implements Serializable, Criteria {
 
     private DoubleFilter procijenjenaVrijednost;
 
-    private LongFilter ponudeId;
-
     private Boolean distinct;
 
     public SpecifikacijeCriteria() {}
@@ -66,7 +64,6 @@ public class SpecifikacijeCriteria implements Serializable, Criteria {
         this.pakovanje = other.pakovanje == null ? null : other.pakovanje.copy();
         this.jedinicaMjere = other.jedinicaMjere == null ? null : other.jedinicaMjere.copy();
         this.procijenjenaVrijednost = other.procijenjenaVrijednost == null ? null : other.procijenjenaVrijednost.copy();
-        this.ponudeId = other.ponudeId == null ? null : other.ponudeId.copy();
         this.distinct = other.distinct;
     }
 
@@ -240,21 +237,6 @@ public class SpecifikacijeCriteria implements Serializable, Criteria {
         this.procijenjenaVrijednost = procijenjenaVrijednost;
     }
 
-    public LongFilter getPonudeId() {
-        return ponudeId;
-    }
-
-    public LongFilter ponudeId() {
-        if (ponudeId == null) {
-            ponudeId = new LongFilter();
-        }
-        return ponudeId;
-    }
-
-    public void setPonudeId(LongFilter ponudeId) {
-        this.ponudeId = ponudeId;
-    }
-
     public Boolean getDistinct() {
         return distinct;
     }
@@ -284,7 +266,6 @@ public class SpecifikacijeCriteria implements Serializable, Criteria {
             Objects.equals(pakovanje, that.pakovanje) &&
             Objects.equals(jedinicaMjere, that.jedinicaMjere) &&
             Objects.equals(procijenjenaVrijednost, that.procijenjenaVrijednost) &&
-            Objects.equals(ponudeId, that.ponudeId) &&
             Objects.equals(distinct, that.distinct)
         );
     }
@@ -303,7 +284,6 @@ public class SpecifikacijeCriteria implements Serializable, Criteria {
             pakovanje,
             jedinicaMjere,
             procijenjenaVrijednost,
-            ponudeId,
             distinct
         );
     }
@@ -323,7 +303,6 @@ public class SpecifikacijeCriteria implements Serializable, Criteria {
             (pakovanje != null ? "pakovanje=" + pakovanje + ", " : "") +
             (jedinicaMjere != null ? "jedinicaMjere=" + jedinicaMjere + ", " : "") +
             (procijenjenaVrijednost != null ? "procijenjenaVrijednost=" + procijenjenaVrijednost + ", " : "") +
-            (ponudeId != null ? "ponudeId=" + ponudeId + ", " : "") +
             (distinct != null ? "distinct=" + distinct + ", " : "") +
             "}";
     }

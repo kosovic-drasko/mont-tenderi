@@ -71,10 +71,6 @@ public class Ponude implements Serializable {
     @JsonIgnoreProperties(value = { "ponudes" }, allowSetters = true)
     private Ponudjaci ponudjaci;
 
-    @ManyToOne
-    @JsonIgnoreProperties(value = { "ponudes" }, allowSetters = true)
-    private Specifikacije specifikacije;
-
     // jhipster-needle-entity-add-field - JHipster will add fields here
 
     public Long getId() {
@@ -256,19 +252,6 @@ public class Ponude implements Serializable {
 
     public Ponude ponudjaci(Ponudjaci ponudjaci) {
         this.setPonudjaci(ponudjaci);
-        return this;
-    }
-
-    public Specifikacije getSpecifikacije() {
-        return this.specifikacije;
-    }
-
-    public void setSpecifikacije(Specifikacije specifikacije) {
-        this.specifikacije = specifikacije;
-    }
-
-    public Ponude specifikacije(Specifikacije specifikacije) {
-        this.setSpecifikacije(specifikacije);
         return this;
     }
 

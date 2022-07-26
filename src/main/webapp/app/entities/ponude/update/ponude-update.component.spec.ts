@@ -12,8 +12,6 @@ import { IPostupci } from 'app/entities/postupci/postupci.model';
 import { PostupciService } from 'app/entities/postupci/service/postupci.service';
 import { IPonudjaci } from 'app/entities/ponudjaci/ponudjaci.model';
 import { PonudjaciService } from 'app/entities/ponudjaci/service/ponudjaci.service';
-import { ISpecifikacije } from 'app/entities/specifikacije/specifikacije.model';
-import { SpecifikacijeService } from 'app/entities/specifikacije/service/specifikacije.service';
 
 import { PonudeUpdateComponent } from './ponude-update.component';
 
@@ -24,7 +22,6 @@ describe('Ponude Management Update Component', () => {
   let ponudeService: PonudeService;
   let postupciService: PostupciService;
   let ponudjaciService: PonudjaciService;
-  let specifikacijeService: SpecifikacijeService;
 
   beforeEach(() => {
     TestBed.configureTestingModule({
@@ -48,7 +45,6 @@ describe('Ponude Management Update Component', () => {
     ponudeService = TestBed.inject(PonudeService);
     postupciService = TestBed.inject(PostupciService);
     ponudjaciService = TestBed.inject(PonudjaciService);
-    specifikacijeService = TestBed.inject(SpecifikacijeService);
 
     comp = fixture.componentInstance;
   });
@@ -92,36 +88,12 @@ describe('Ponude Management Update Component', () => {
       expect(comp.ponudjacisSharedCollection).toEqual(expectedCollection);
     });
 
-    it('Should call Specifikacije query and add missing value', () => {
-      const ponude: IPonude = { id: 456 };
-      const specifikacije: ISpecifikacije = { id: 88339 };
-      ponude.specifikacije = specifikacije;
-
-      const specifikacijeCollection: ISpecifikacije[] = [{ id: 20334 }];
-      jest.spyOn(specifikacijeService, 'query').mockReturnValue(of(new HttpResponse({ body: specifikacijeCollection })));
-      const additionalSpecifikacijes = [specifikacije];
-      const expectedCollection: ISpecifikacije[] = [...additionalSpecifikacijes, ...specifikacijeCollection];
-      jest.spyOn(specifikacijeService, 'addSpecifikacijeToCollectionIfMissing').mockReturnValue(expectedCollection);
-
-      activatedRoute.data = of({ ponude });
-      comp.ngOnInit();
-
-      expect(specifikacijeService.query).toHaveBeenCalled();
-      expect(specifikacijeService.addSpecifikacijeToCollectionIfMissing).toHaveBeenCalledWith(
-        specifikacijeCollection,
-        ...additionalSpecifikacijes
-      );
-      expect(comp.specifikacijesSharedCollection).toEqual(expectedCollection);
-    });
-
     it('Should update editForm', () => {
       const ponude: IPonude = { id: 456 };
       const postupci: IPostupci = { id: 40444 };
       ponude.postupci = postupci;
       const ponudjaci: IPonudjaci = { id: 4355 };
       ponude.ponudjaci = ponudjaci;
-      const specifikacije: ISpecifikacije = { id: 42114 };
-      ponude.specifikacije = specifikacije;
 
       activatedRoute.data = of({ ponude });
       comp.ngOnInit();
@@ -129,7 +101,6 @@ describe('Ponude Management Update Component', () => {
       expect(comp.editForm.value).toEqual(expect.objectContaining(ponude));
       expect(comp.postupcisSharedCollection).toContain(postupci);
       expect(comp.ponudjacisSharedCollection).toContain(ponudjaci);
-      expect(comp.specifikacijesSharedCollection).toContain(specifikacije);
     });
   });
 
@@ -210,14 +181,6 @@ describe('Ponude Management Update Component', () => {
       it('Should return tracked Ponudjaci primary key', () => {
         const entity = { id: 123 };
         const trackResult = comp.trackPonudjaciById(0, entity);
-        expect(trackResult).toEqual(entity.id);
-      });
-    });
-
-    describe('trackSpecifikacijeById', () => {
-      it('Should return tracked Specifikacije primary key', () => {
-        const entity = { id: 123 };
-        const trackResult = comp.trackSpecifikacijeById(0, entity);
         expect(trackResult).toEqual(entity.id);
       });
     });

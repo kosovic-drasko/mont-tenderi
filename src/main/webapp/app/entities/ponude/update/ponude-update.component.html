@@ -299,29 +299,6 @@
             </option>
           </select>
         </div>
-
-        <div class="row mb-3">
-          <label class="form-label" jhiTranslate="tenderApp.ponude.specifikacije" for="field_specifikacije">Specifikacije</label>
-          <select
-            class="form-control"
-            id="field_specifikacije"
-            data-cy="specifikacije"
-            name="specifikacije"
-            formControlName="specifikacije"
-          >
-            <option [ngValue]="null"></option>
-            <option
-              [ngValue]="
-                specifikacijeOption.id === editForm.get('specifikacije')!.value?.id
-                  ? editForm.get('specifikacije')!.value
-                  : specifikacijeOption
-              "
-              *ngFor="let specifikacijeOption of specifikacijesSharedCollection; trackBy: trackSpecifikacijeById"
-            >
-              {{ specifikacijeOption.id }}
-            </option>
-          </select>
-        </div>
       </div>
 
       <div>

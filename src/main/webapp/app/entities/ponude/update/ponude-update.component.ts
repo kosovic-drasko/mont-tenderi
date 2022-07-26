@@ -11,8 +11,6 @@ import { IPostupci } from 'app/entities/postupci/postupci.model';
 import { PostupciService } from 'app/entities/postupci/service/postupci.service';
 import { IPonudjaci } from 'app/entities/ponudjaci/ponudjaci.model';
 import { PonudjaciService } from 'app/entities/ponudjaci/service/ponudjaci.service';
-import { ISpecifikacije } from 'app/entities/specifikacije/specifikacije.model';
-import { SpecifikacijeService } from 'app/entities/specifikacije/service/specifikacije.service';
 
 @Component({
   selector: 'jhi-ponude-update',
@@ -23,7 +21,6 @@ export class PonudeUpdateComponent implements OnInit {
 
   postupcisSharedCollection: IPostupci[] = [];
   ponudjacisSharedCollection: IPonudjaci[] = [];
-  specifikacijesSharedCollection: ISpecifikacije[] = [];
 
   editForm = this.fb.group({
     id: [],
@@ -40,14 +37,12 @@ export class PonudeUpdateComponent implements OnInit {
     selected: [],
     postupci: [],
     ponudjaci: [],
-    specifikacije: [],
   });
 
   constructor(
     protected ponudeService: PonudeService,
     protected postupciService: PostupciService,
     protected ponudjaciService: PonudjaciService,
-    protected specifikacijeService: SpecifikacijeService,
     protected activatedRoute: ActivatedRoute,
     protected fb: FormBuilder
   ) {}
@@ -79,10 +74,6 @@ export class PonudeUpdateComponent implements OnInit {
   }
 
   trackPonudjaciById(_index: number, item: IPonudjaci): number {
-    return item.id!;
-  }
-
-  trackSpecifikacijeById(_index: number, item: ISpecifikacije): number {
     return item.id!;
   }
 
@@ -121,17 +112,12 @@ export class PonudeUpdateComponent implements OnInit {
       selected: ponude.selected,
       postupci: ponude.postupci,
       ponudjaci: ponude.ponudjaci,
-      specifikacije: ponude.specifikacije,
     });
 
     this.postupcisSharedCollection = this.postupciService.addPostupciToCollectionIfMissing(this.postupcisSharedCollection, ponude.postupci);
     this.ponudjacisSharedCollection = this.ponudjaciService.addPonudjaciToCollectionIfMissing(
       this.ponudjacisSharedCollection,
       ponude.ponudjaci
-    );
-    this.specifikacijesSharedCollection = this.specifikacijeService.addSpecifikacijeToCollectionIfMissing(
-      this.specifikacijesSharedCollection,
-      ponude.specifikacije
     );
   }
 
@@ -155,16 +141,6 @@ export class PonudeUpdateComponent implements OnInit {
         )
       )
       .subscribe((ponudjacis: IPonudjaci[]) => (this.ponudjacisSharedCollection = ponudjacis));
-
-    this.specifikacijeService
-      .query()
-      .pipe(map((res: HttpResponse<ISpecifikacije[]>) => res.body ?? []))
-      .pipe(
-        map((specifikacijes: ISpecifikacije[]) =>
-          this.specifikacijeService.addSpecifikacijeToCollectionIfMissing(specifikacijes, this.editForm.get('specifikacije')!.value)
-        )
-      )
-      .subscribe((specifikacijes: ISpecifikacije[]) => (this.specifikacijesSharedCollection = specifikacijes));
   }
 
   protected createFromForm(): IPonude {
@@ -184,7 +160,6 @@ export class PonudeUpdateComponent implements OnInit {
       selected: this.editForm.get(['selected'])!.value,
       postupci: this.editForm.get(['postupci'])!.value,
       ponudjaci: this.editForm.get(['ponudjaci'])!.value,
-      specifikacije: this.editForm.get(['specifikacije'])!.value,
     };
   }
 }

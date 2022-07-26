@@ -55,13 +55,6 @@
   "name": "Specifikacije",
   "pagination": "no",
   "readOnly": false,
-  "relationships": [
-    {
-      "otherEntityName": "ponude",
-      "otherEntityRelationshipName": "specifikacije",
-      "relationshipName": "ponude",
-      "relationshipType": "one-to-many"
-    }
-  ],
+  "relationships": [],
   "service": "serviceClass"
 }

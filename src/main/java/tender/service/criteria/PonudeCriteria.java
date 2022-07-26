@@ -54,8 +54,6 @@ public class PonudeCriteria implements Serializable, Criteria {
 
     private LongFilter ponudjaciId;
 
-    private LongFilter specifikacijeId;
-
     private Boolean distinct;
 
     public PonudeCriteria() {}
@@ -75,7 +73,6 @@ public class PonudeCriteria implements Serializable, Criteria {
         this.selected = other.selected == null ? null : other.selected.copy();
         this.postupciId = other.postupciId == null ? null : other.postupciId.copy();
         this.ponudjaciId = other.ponudjaciId == null ? null : other.ponudjaciId.copy();
-        this.specifikacijeId = other.specifikacijeId == null ? null : other.specifikacijeId.copy();
         this.distinct = other.distinct;
     }
 
@@ -294,21 +291,6 @@ public class PonudeCriteria implements Serializable, Criteria {
         this.ponudjaciId = ponudjaciId;
     }
 
-    public LongFilter getSpecifikacijeId() {
-        return specifikacijeId;
-    }
-
-    public LongFilter specifikacijeId() {
-        if (specifikacijeId == null) {
-            specifikacijeId = new LongFilter();
-        }
-        return specifikacijeId;
-    }
-
-    public void setSpecifikacijeId(LongFilter specifikacijeId) {
-        this.specifikacijeId = specifikacijeId;
-    }
-
     public Boolean getDistinct() {
         return distinct;
     }
@@ -341,7 +323,6 @@ public class PonudeCriteria implements Serializable, Criteria {
             Objects.equals(selected, that.selected) &&
             Objects.equals(postupciId, that.postupciId) &&
             Objects.equals(ponudjaciId, that.ponudjaciId) &&
-            Objects.equals(specifikacijeId, that.specifikacijeId) &&
             Objects.equals(distinct, that.distinct)
         );
     }
@@ -363,7 +344,6 @@ public class PonudeCriteria implements Serializable, Criteria {
             selected,
             postupciId,
             ponudjaciId,
-            specifikacijeId,
             distinct
         );
     }
@@ -386,7 +366,6 @@ public class PonudeCriteria implements Serializable, Criteria {
             (selected != null ? "selected=" + selected + ", " : "") +
             (postupciId != null ? "postupciId=" + postupciId + ", " : "") +
             (ponudjaciId != null ? "ponudjaciId=" + ponudjaciId + ", " : "") +
-            (specifikacijeId != null ? "specifikacijeId=" + specifikacijeId + ", " : "") +
             (distinct != null ? "distinct=" + distinct + ", " : "") +
             "}";
     }

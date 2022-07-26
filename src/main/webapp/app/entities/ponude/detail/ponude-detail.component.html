@@ -70,12 +70,6 @@
             <a [routerLink]="['/ponudjaci', ponude.ponudjaci?.id, 'view']">{{ ponude.ponudjaci?.id }}</a>
           </div>
         </dd>
-        <dt><span jhiTranslate="tenderApp.ponude.specifikacije">Specifikacije</span></dt>
-        <dd>
-          <div *ngIf="ponude.specifikacije">
-            <a [routerLink]="['/specifikacije', ponude.specifikacije?.id, 'view']">{{ ponude.specifikacije?.id }}</a>
-          </div>
-        </dd>
       </dl>
 
       <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">

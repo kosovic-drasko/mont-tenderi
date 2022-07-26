@@ -6,7 +6,7 @@ entity Ponudjaci {
 entity Postupci {
   sifraPostupka Integer required
   brojTendera String required
-  opisPostupka String 
+  opisPostupka String
   vrstaPostupka String required
   datumObjave LocalDate
   datumOtvaranja LocalDate
@@ -45,10 +45,7 @@ relationship OneToMany {
 	Ponudjaci to Ponude{ponudjaci},
 
 }
-relationship OneToMany {
-	Specifikacije to Ponude{specifikacije},
 
-}
 
 service Ponude, Specifikacije with serviceClass
 filter Ponude, Specifikacije

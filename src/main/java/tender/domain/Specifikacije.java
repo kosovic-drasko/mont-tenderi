@@ -1,9 +1,6 @@
 package tender.domain;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import java.io.Serializable;
-import java.util.HashSet;
-import java.util.Set;
 import javax.persistence.*;
 import javax.validation.constraints.*;
 import org.hibernate.annotations.Cache;
@@ -58,11 +55,6 @@ public class Specifikacije implements Serializable {
     @NotNull
     @Column(name = "procijenjena_vrijednost", nullable = false)
     private Double procijenjenaVrijednost;
-
-    @OneToMany(mappedBy = "specifikacije")
-    @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
-    @JsonIgnoreProperties(value = { "postupci", "ponudjaci", "specifikacije" }, allowSetters = true)
-    private Set<Ponude> ponudes = new HashSet<>();
 
     // jhipster-needle-entity-add-field - JHipster will add fields here
 
@@ -207,37 +199,6 @@ public class Specifikacije implements Serializable {
 
     public void setProcijenjenaVrijednost(Double procijenjenaVrijednost) {
         this.procijenjenaVrijednost = procijenjenaVrijednost;
-    }
-
-    public Set<Ponude> getPonudes() {
-        return this.ponudes;
-    }
-
-    public void setPonudes(Set<Ponude> ponudes) {
-        if (this.ponudes != null) {
-            this.ponudes.forEach(i -> i.setSpecifikacije(null));
-        }
-        if (ponudes != null) {
-            ponudes.forEach(i -> i.setSpecifikacije(this));
-        }
-        this.ponudes = ponudes;
-    }
-
-    public Specifikacije ponudes(Set<Ponude> ponudes) {
-        this.setPonudes(ponudes);
-        return this;
-    }
-
-    public Specifikacije addPonude(Ponude ponude) {
-        this.ponudes.add(ponude);
-        ponude.setSpecifikacije(this);
-        return this;
-    }
-
-    public Specifikacije removePonude(Ponude ponude) {
-        this.ponudes.remove(ponude);
-        ponude.setSpecifikacije(null);
-        return this;
     }
 
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here

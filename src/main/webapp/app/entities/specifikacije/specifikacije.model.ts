@@ -1,5 +1,3 @@
-import { IPonude } from 'app/entities/ponude/ponude.model';
-
 export interface ISpecifikacije {
   id?: number;
   sifraPostupka?: number;
@@ -12,7 +10,6 @@ export interface ISpecifikacije {
   pakovanje?: string | null;
   jedinicaMjere?: string | null;
   procijenjenaVrijednost?: number;
-  ponudes?: IPonude[] | null;
 }
 
 export class Specifikacije implements ISpecifikacije {
@@ -27,8 +24,7 @@ export class Specifikacije implements ISpecifikacije {
     public trazenaKolicina?: number,
     public pakovanje?: string | null,
     public jedinicaMjere?: string | null,
-    public procijenjenaVrijednost?: number,
-    public ponudes?: IPonude[] | null
+    public procijenjenaVrijednost?: number
   ) {}
 }
 

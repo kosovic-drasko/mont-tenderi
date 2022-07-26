@@ -119,12 +119,6 @@ public class SpecifikacijeQueryService extends QueryService<Specifikacije> {
                 specification =
                     specification.and(buildRangeSpecification(criteria.getProcijenjenaVrijednost(), Specifikacije_.procijenjenaVrijednost));
             }
-            if (criteria.getPonudeId() != null) {
-                specification =
-                    specification.and(
-                        buildSpecification(criteria.getPonudeId(), root -> root.join(Specifikacije_.ponudes, JoinType.LEFT).get(Ponude_.id))
-                    );
-            }
         }
         return specification;
     }

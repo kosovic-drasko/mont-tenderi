@@ -133,15 +133,6 @@ public class PonudeQueryService extends QueryService<Ponude> {
                         )
                     );
             }
-            if (criteria.getSpecifikacijeId() != null) {
-                specification =
-                    specification.and(
-                        buildSpecification(
-                            criteria.getSpecifikacijeId(),
-                            root -> root.join(Ponude_.specifikacije, JoinType.LEFT).get(Specifikacije_.id)
-                        )
-                    );
-            }
         }
         return specification;
     }

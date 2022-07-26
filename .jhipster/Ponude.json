@@ -74,12 +74,6 @@
       "otherEntityRelationshipName": "ponude",
       "relationshipName": "ponudjaci",
       "relationshipType": "many-to-one"
-    },
-    {
-      "otherEntityName": "specifikacije",
-      "otherEntityRelationshipName": "ponude",
-      "relationshipName": "specifikacije",
-      "relationshipType": "many-to-one"
     }
   ],
   "service": "serviceClass"

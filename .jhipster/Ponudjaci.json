@@ -1,0 +1,35 @@
+{
+  "applications": "*",
+  "changelogDate": "20220726171152",
+  "dto": "no",
+  "embedded": false,
+  "entityTableName": "ponudjaci",
+  "fields": [
+    {
+      "fieldName": "nazivPonudjaca",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "odgovornoLice",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "adresaPonudjaca",
+      "fieldType": "String"
+    }
+  ],
+  "fluentMethods": true,
+  "jpaMetamodelFiltering": false,
+  "name": "Ponudjaci",
+  "pagination": "no",
+  "readOnly": false,
+  "relationships": [
+    {
+      "otherEntityName": "ponude",
+      "otherEntityRelationshipName": "ponudjaci",
+      "relationshipName": "ponude",
+      "relationshipType": "one-to-many"
+    }
+  ],
+  "service": "no"
+}

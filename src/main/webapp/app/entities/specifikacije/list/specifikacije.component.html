@@ -1,0 +1,96 @@
+<div>
+  <h2 id="page-heading" data-cy="SpecifikacijeHeading">
+    <span jhiTranslate="tenderApp.specifikacije.home.title">Specifikacijes</span>
+
+    <div class="d-flex justify-content-end">
+      <button class="btn btn-info me-2" (click)="loadAll()" [disabled]="isLoading">
+        <fa-icon icon="sync" [spin]="isLoading"></fa-icon>
+        <span jhiTranslate="tenderApp.specifikacije.home.refreshListLabel">Refresh List</span>
+      </button>
+
+      <button
+        id="jh-create-entity"
+        data-cy="entityCreateButton"
+        class="btn btn-primary jh-create-entity create-specifikacije"
+        [routerLink]="['/specifikacije/new']"
+      >
+        <fa-icon icon="plus"></fa-icon>
+        <span jhiTranslate="tenderApp.specifikacije.home.createLabel"> Create a new Specifikacije </span>
+      </button>
+    </div>
+  </h2>
+
+  <jhi-alert-error></jhi-alert-error>
+
+  <jhi-alert></jhi-alert>
+
+  <div class="alert alert-warning" id="no-result" *ngIf="specifikacijes?.length === 0">
+    <span jhiTranslate="tenderApp.specifikacije.home.notFound">No specifikacijes found</span>
+  </div>
+
+  <div class="table-responsive" id="entities" *ngIf="specifikacijes && specifikacijes.length > 0">
+    <table class="table table-striped" aria-describedby="page-heading">
+      <thead>
+        <tr>
+          <th scope="col"><span jhiTranslate="global.field.id">ID</span></th>
+          <th scope="col"><span jhiTranslate="tenderApp.specifikacije.sifraPostupka">Sifra Postupka</span></th>
+          <th scope="col"><span jhiTranslate="tenderApp.specifikacije.brojPartije">Broj Partije</span></th>
+          <th scope="col"><span jhiTranslate="tenderApp.specifikacije.atc">Atc</span></th>
+          <th scope="col"><span jhiTranslate="tenderApp.specifikacije.inn">Inn</span></th>
+          <th scope="col"><span jhiTranslate="tenderApp.specifikacije.farmaceutskiOblikLijeka">Farmaceutski Oblik Lijeka</span></th>
+          <th scope="col"><span jhiTranslate="tenderApp.specifikacije.jacinaLijeka">Jacina Lijeka</span></th>
+          <th scope="col"><span jhiTranslate="tenderApp.specifikacije.trazenaKolicina">Trazena Kolicina</span></th>
+          <th scope="col"><span jhiTranslate="tenderApp.specifikacije.pakovanje">Pakovanje</span></th>
+          <th scope="col"><span jhiTranslate="tenderApp.specifikacije.jedinicaMjere">Jedinica Mjere</span></th>
+          <th scope="col"><span jhiTranslate="tenderApp.specifikacije.procijenjenaVrijednost">Procijenjena Vrijednost</span></th>
+          <th scope="col"></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let specifikacije of specifikacijes; trackBy: trackId" data-cy="entityTable">
+          <td>
+            <a [routerLink]="['/specifikacije', specifikacije.id, 'view']">{{ specifikacije.id }}</a>
+          </td>
+          <td>{{ specifikacije.sifraPostupka }}</td>
+          <td>{{ specifikacije.brojPartije }}</td>
+          <td>{{ specifikacije.atc }}</td>
+          <td>{{ specifikacije.inn }}</td>
+          <td>{{ specifikacije.farmaceutskiOblikLijeka }}</td>
+          <td>{{ specifikacije.jacinaLijeka }}</td>
+          <td>{{ specifikacije.trazenaKolicina }}</td>
+          <td>{{ specifikacije.pakovanje }}</td>
+          <td>{{ specifikacije.jedinicaMjere }}</td>
+          <td>{{ specifikacije.procijenjenaVrijednost }}</td>
+          <td class="text-end">
+            <div class="btn-group">
+              <button
+                type="submit"
+                [routerLink]="['/specifikacije', specifikacije.id, 'view']"
+                class="btn btn-info btn-sm"
+                data-cy="entityDetailsButton"
+              >
+                <fa-icon icon="eye"></fa-icon>
+                <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>
+              </button>
+
+              <button
+                type="submit"
+                [routerLink]="['/specifikacije', specifikacije.id, 'edit']"
+                class="btn btn-primary btn-sm"
+                data-cy="entityEditButton"
+              >
+                <fa-icon icon="pencil-alt"></fa-icon>
+                <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
+              </button>
+
+              <button type="submit" (click)="delete(specifikacije)" class="btn btn-danger btn-sm" data-cy="entityDeleteButton">
+                <fa-icon icon="times"></fa-icon>
+                <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Delete</span>
+              </button>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

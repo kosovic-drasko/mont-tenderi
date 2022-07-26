@@ -1,0 +1,54 @@
+entity Ponudjaci {
+  nazivPonudjaca String
+  odgovornoLice String
+  adresaPonudjaca String
+ }
+entity Postupci {
+  sifraPostupka Integer required
+  brojTendera String required
+  opisPostupka String 
+  vrstaPostupka String required
+  datumObjave LocalDate
+  datumOtvaranja LocalDate
+}
+entity Specifikacije {
+  sifraPostupka Integer required
+  brojPartije Integer required
+  atc String
+  inn String
+  farmaceutskiOblikLijeka String
+  jacinaLijeka String
+  trazenaKolicina Integer required
+  pakovanje String
+  jedinicaMjere String
+  procijenjenaVrijednost Double required
+}
+entity Ponude {
+  sifraPostupka Integer required
+  sifraPonude Integer required
+  brojPartije Integer required
+  nazivProizvodjaca String
+  zasticeniNaziv String
+  ponudjanaKolicina Integer required
+  ponudjenaVrijednost Double required
+  jedinicnaCijena Double
+  rokIsporuke Integer required
+  sifraPonudjaca Integer required
+  selected Boolean
+}
+relationship OneToMany {
+	Postupci to Ponude{postupci},
+
+}
+
+relationship OneToMany {
+	Ponudjaci to Ponude{ponudjaci},
+
+}
+relationship OneToMany {
+	Specifikacije to Ponude{specifikacije},
+
+}
+
+service Ponude, Specifikacije with serviceClass
+filter Ponude, Specifikacije

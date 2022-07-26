@@ -1,0 +1,106 @@
+<div>
+  <h2 id="page-heading" data-cy="PonudeHeading">
+    <span jhiTranslate="tenderApp.ponude.home.title">Ponudes</span>
+
+    <div class="d-flex justify-content-end">
+      <button class="btn btn-info me-2" (click)="loadAll()" [disabled]="isLoading">
+        <fa-icon icon="sync" [spin]="isLoading"></fa-icon>
+        <span jhiTranslate="tenderApp.ponude.home.refreshListLabel">Refresh List</span>
+      </button>
+
+      <button
+        id="jh-create-entity"
+        data-cy="entityCreateButton"
+        class="btn btn-primary jh-create-entity create-ponude"
+        [routerLink]="['/ponude/new']"
+      >
+        <fa-icon icon="plus"></fa-icon>
+        <span jhiTranslate="tenderApp.ponude.home.createLabel"> Create a new Ponude </span>
+      </button>
+    </div>
+  </h2>
+
+  <jhi-alert-error></jhi-alert-error>
+
+  <jhi-alert></jhi-alert>
+
+  <div class="alert alert-warning" id="no-result" *ngIf="ponudes?.length === 0">
+    <span jhiTranslate="tenderApp.ponude.home.notFound">No ponudes found</span>
+  </div>
+
+  <div class="table-responsive" id="entities" *ngIf="ponudes && ponudes.length > 0">
+    <table class="table table-striped" aria-describedby="page-heading">
+      <thead>
+        <tr>
+          <th scope="col"><span jhiTranslate="global.field.id">ID</span></th>
+          <th scope="col"><span jhiTranslate="tenderApp.ponude.sifraPostupka">Sifra Postupka</span></th>
+          <th scope="col"><span jhiTranslate="tenderApp.ponude.sifraPonude">Sifra Ponude</span></th>
+          <th scope="col"><span jhiTranslate="tenderApp.ponude.brojPartije">Broj Partije</span></th>
+          <th scope="col"><span jhiTranslate="tenderApp.ponude.nazivProizvodjaca">Naziv Proizvodjaca</span></th>
+          <th scope="col"><span jhiTranslate="tenderApp.ponude.zasticeniNaziv">Zasticeni Naziv</span></th>
+          <th scope="col"><span jhiTranslate="tenderApp.ponude.ponudjanaKolicina">Ponudjana Kolicina</span></th>
+          <th scope="col"><span jhiTranslate="tenderApp.ponude.ponudjenaVrijednost">Ponudjena Vrijednost</span></th>
+          <th scope="col"><span jhiTranslate="tenderApp.ponude.jedinicnaCijena">Jedinicna Cijena</span></th>
+          <th scope="col"><span jhiTranslate="tenderApp.ponude.rokIsporuke">Rok Isporuke</span></th>
+          <th scope="col"><span jhiTranslate="tenderApp.ponude.sifraPonudjaca">Sifra Ponudjaca</span></th>
+          <th scope="col"><span jhiTranslate="tenderApp.ponude.selected">Selected</span></th>
+          <th scope="col"><span jhiTranslate="tenderApp.ponude.postupci">Postupci</span></th>
+          <th scope="col"><span jhiTranslate="tenderApp.ponude.ponudjaci">Ponudjaci</span></th>
+          <th scope="col"><span jhiTranslate="tenderApp.ponude.specifikacije">Specifikacije</span></th>
+          <th scope="col"></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let ponude of ponudes; trackBy: trackId" data-cy="entityTable">
+          <td>
+            <a [routerLink]="['/ponude', ponude.id, 'view']">{{ ponude.id }}</a>
+          </td>
+          <td>{{ ponude.sifraPostupka }}</td>
+          <td>{{ ponude.sifraPonude }}</td>
+          <td>{{ ponude.brojPartije }}</td>
+          <td>{{ ponude.nazivProizvodjaca }}</td>
+          <td>{{ ponude.zasticeniNaziv }}</td>
+          <td>{{ ponude.ponudjanaKolicina }}</td>
+          <td>{{ ponude.ponudjenaVrijednost }}</td>
+          <td>{{ ponude.jedinicnaCijena }}</td>
+          <td>{{ ponude.rokIsporuke }}</td>
+          <td>{{ ponude.sifraPonudjaca }}</td>
+          <td>{{ ponude.selected }}</td>
+          <td>
+            <div *ngIf="ponude.postupci">
+              <a [routerLink]="['/postupci', ponude.postupci?.id, 'view']">{{ ponude.postupci?.id }}</a>
+            </div>
+          </td>
+          <td>
+            <div *ngIf="ponude.ponudjaci">
+              <a [routerLink]="['/ponudjaci', ponude.ponudjaci?.id, 'view']">{{ ponude.ponudjaci?.id }}</a>
+            </div>
+          </td>
+          <td>
+            <div *ngIf="ponude.specifikacije">
+              <a [routerLink]="['/specifikacije', ponude.specifikacije?.id, 'view']">{{ ponude.specifikacije?.id }}</a>
+            </div>
+          </td>
+          <td class="text-end">
+            <div class="btn-group">
+              <button type="submit" [routerLink]="['/ponude', ponude.id, 'view']" class="btn btn-info btn-sm" data-cy="entityDetailsButton">
+                <fa-icon icon="eye"></fa-icon>
+                <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>
+              </button>
+
+              <button type="submit" [routerLink]="['/ponude', ponude.id, 'edit']" class="btn btn-primary btn-sm" data-cy="entityEditButton">
+                <fa-icon icon="pencil-alt"></fa-icon>
+                <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
+              </button>
+
+              <button type="submit" (click)="delete(ponude)" class="btn btn-danger btn-sm" data-cy="entityDeleteButton">
+                <fa-icon icon="times"></fa-icon>
+                <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Delete</span>
+              </button>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
